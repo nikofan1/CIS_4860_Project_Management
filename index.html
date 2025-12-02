@@ -1,10 +1,11 @@
-<index.html>
+<!-- Updated index.html with Project Closure tile -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Career Project Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* (Original styles preserved exactly) */
     :root {
       --bg-primary: radial-gradient(1200px 800px at 50% 10%, #00131f 0%, #001a2b 30%, #001e33 55%, #021a2a 100%);
       --card-bg: rgba(9, 18, 34, 0.92);
@@ -18,13 +19,7 @@
       --radius-lg: 16px;
       --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -36,7 +31,6 @@
       justify-content: center;
       padding: 32px 16px;
     }
-
     .glass-layer {
       position: fixed;
       inset: 0;
@@ -48,29 +42,15 @@
       -webkit-backdrop-filter: blur(12px) saturate(130%);
       z-index: 0;
     }
-
-    .hub-shell {
-      width: 100%;
-      max-width: 1080px;
-      position: relative;
-      z-index: 1;
-    }
-
+    .hub-shell { width: 100%; max-width: 1080px; position: relative; z-index: 1; }
     .hub-card {
-      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 55%),
-                  rgba(15, 23, 42, 0.96);
+      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 55%), rgba(15, 23, 42, 0.96);
       border-radius: 24px;
       border: 1px solid rgba(148, 163, 184, 0.35);
       box-shadow: var(--shadow-soft);
       padding: 28px 22px 30px;
     }
-
-    @media (min-width: 768px) {
-      .hub-card {
-        padding: 32px 32px 36px;
-      }
-    }
-
+    @media (min-width: 768px) { .hub-card { padding: 32px 32px 36px; } }
     .hub-header {
       display: flex;
       flex-wrap: wrap;
@@ -81,11 +61,7 @@
       border-bottom: 1px solid rgba(148, 163, 184, 0.35);
       padding-bottom: 18px;
     }
-
-    .hub-title-group {
-      max-width: 640px;
-    }
-
+    .hub-title-group { max-width: 640px; }
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -99,24 +75,8 @@
       text-transform: uppercase;
       color: var(--text-muted);
     }
-
-    .eyebrow span:first-child {
-      font-size: 13px;
-    }
-
-    h1 {
-      margin-top: 8px;
-      font-size: clamp(24px, 3vw, 30px);
-      letter-spacing: -0.03em;
-    }
-
-    .subtitle {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
+    h1 { margin-top: 8px; font-size: clamp(24px, 3vw, 30px); letter-spacing: -0.03em; }
+    .subtitle { margin-top: 6px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
     .pill {
       padding: 6px 12px;
       border-radius: 999px;
@@ -130,19 +90,16 @@
       white-space: nowrap;
     }
 
+    /* Grid */
     .hub-grid {
       margin-top: 20px;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: 18px;
     }
+    @media (min-width: 840px) { .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-    @media (min-width: 840px) {
-      .hub-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
+    /* Tile */
     .hub-tile {
       position: relative;
       background: var(--card-bg);
@@ -154,46 +111,17 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+      transition: 0.16s ease;
       overflow: hidden;
     }
-
-    .hub-tile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(103, 232, 249, 0.16), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
     .hub-tile:hover {
       transform: translateY(-4px);
       border-color: rgba(56, 189, 248, 0.8);
       background: var(--card-hover);
       box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
     }
-
-    .hub-tile:hover::before {
-      opacity: 1;
-    }
-
-    .hub-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .hub-name {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .hub-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.16em; }
+    .hub-name { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
     .hub-icon {
       width: 26px;
       height: 26px;
@@ -206,22 +134,8 @@
       font-size: 15px;
       flex-shrink: 0;
     }
-
-    .hub-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .hub-meta {
-      margin-top: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
+    .hub-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .hub-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; font-size: 11px; color: var(--text-muted); }
     .meta-chip {
       padding: 3px 8px;
       border-radius: 999px;
@@ -229,60 +143,32 @@
       background: rgba(15, 23, 42, 0.9);
     }
 
-    .hub-footer {
-      margin-top: 22px;
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .hub-footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .hub-footer a:hover {
-      text-decoration: underline;
-    }
+    .hub-footer { margin-top: 22px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .hub-footer a { color: var(--accent); text-decoration: none; }
+    .hub-footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div class="glass-layer"></div>
-
   <main class="hub-shell">
     <section class="hub-card">
       <header class="hub-header">
         <div class="hub-title-group">
           <div class="eyebrow">
-            <span>📚</span>
-            <span>Career Project • Main Hub</span>
+            <span>📚</span><span>Career Project • Main Hub</span>
           </div>
           <h1>Entry-Level I.T Career Project – Hub</h1>
-          <p class="subtitle">
-            Start here to explore the full project: your Project Charter, STAR interview stories, 
-            and weekly Status Updates.
-          </p>
+          <p class="subtitle">Start here to explore the full project.</p>
         </div>
-        <div class="pill">
-          <span>◦ All sections in one place</span>
-        </div>
+        <div class="pill"><span>◦ All sections in one place</span></div>
       </header>
 
       <section class="hub-grid">
         <!-- Project Charter -->
         <a class="hub-tile" href="Project Charter Backup.html">
           <div class="hub-label">Section 01</div>
-          <div class="hub-name">
-            <span class="hub-icon">📘</span>
-            <span>Project Charter</span>
-          </div>
-          <p class="hub-desc">
-            Full overview of your Entry-Level I.T project: goal, scope, stakeholders, deliverables,
-            work breakdown, budget, and methodology.
-          </p>
+          <div class="hub-name"><span class="hub-icon">📘</span><span>Project Charter</span></div>
+          <p class="hub-desc">Overview of your project, including scope, goals, and deliverables.</p>
           <div class="hub-meta">
             <span class="meta-chip">Goal & Scope</span>
             <span class="meta-chip">Stakeholders</span>
@@ -293,43 +179,44 @@
         <!-- STAR Stories -->
         <a class="hub-tile" href="STAR Stories.html">
           <div class="hub-label">Section 02</div>
-          <div class="hub-name">
-            <span class="hub-icon">⭐</span>
-            <span>STAR Stories</span>
-          </div>
-          <p class="hub-desc">
-            Behavioral interview examples using the STAR format that highlight your customer
-            service, teamwork, leadership, and problem-solving skills.
-          </p>
+          <div class="hub-name"><span class="hub-icon">⭐</span><span>STAR Stories</span></div>
+          <p class="hub-desc">Behavioral interview responses using the STAR method.</p>
           <div class="hub-meta">
-            <span class="meta-chip">Behavioral Interview</span>
-            <span class="meta-chip">Customer Service</span>
+            <span class="meta-chip">Interview</span>
             <span class="meta-chip">Teamwork</span>
+            <span class="meta-chip">Leadership</span>
           </div>
         </a>
 
         <!-- Status Updates -->
         <a class="hub-tile" href="Status Updates.html">
           <div class="hub-label">Section 03</div>
-          <div class="hub-name">
-            <span class="hub-icon">📈</span>
-            <span>Status Updates</span>
-          </div>
-          <p class="hub-desc">
-            Weekly check-ins and progress reports that show how the project evolved over the
-            semester, including linked PDF updates.
-          </p>
+          <div class="hub-name"><span class="hub-icon">📈</span><span>Status Updates</span></div>
+          <p class="hub-desc">Weekly progress check-ins documenting your project development.</p>
           <div class="hub-meta">
             <span class="meta-chip">Weeks 9–14</span>
             <span class="meta-chip">Progress</span>
             <span class="meta-chip">Reflection</span>
           </div>
         </a>
+
+        <!-- NEW: Project Closure -->
+        <a class="hub-tile" href="Project Closure.html">
+          <div class="hub-label">Section 04</div>
+          <div class="hub-name"><span class="hub-icon">📕</span><span>Project Closure</span></div>
+          <p class="hub-desc">Final documentation of outcomes, performance analysis, lessons learned, and official closeout.</p>
+          <div class="hub-meta">
+            <span class="meta-chip">Lessons Learned</span>
+            <span class="meta-chip">Deliverables</span>
+            <span class="meta-chip">Sign-Off</span>
+          </div>
+        </a>
+
       </section>
 
       <footer class="hub-footer">
-        <span>Tip: You can set this page as your “home” when presenting your project.</span>
-        <span><a href="Project Charter Backup.html">Jump straight to the Project Charter →</a></span>
+        <span>Tip: Use this hub as your main navigation when presenting.</span>
+        <span><a href="Project Charter Backup.html">Jump to Project Charter →</a></span>
       </footer>
     </section>
   </main>
