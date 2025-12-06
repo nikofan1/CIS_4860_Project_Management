@@ -1,11 +1,10 @@
-<!-- Updated index.html with Project Closure tile -->
+<index.html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Career Project Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* (Original styles preserved exactly) */
     :root {
       --bg-primary: radial-gradient(1200px 800px at 50% 10%, #00131f 0%, #001a2b 30%, #001e33 55%, #021a2a 100%);
       --card-bg: rgba(9, 18, 34, 0.92);
@@ -90,7 +89,6 @@
       white-space: nowrap;
     }
 
-    /* Grid */
     .hub-grid {
       margin-top: 20px;
       display: grid;
@@ -99,7 +97,6 @@
     }
     @media (min-width: 840px) { .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-    /* Tile */
     .hub-tile {
       position: relative;
       background: var(--card-bg);
@@ -136,12 +133,7 @@
     }
     .hub-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
     .hub-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; font-size: 11px; color: var(--text-muted); }
-    .meta-chip {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(51, 65, 85, 0.85);
-      background: rgba(15, 23, 42, 0.9);
-    }
+    .meta-chip { padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(51, 65, 85, 0.85); background: rgba(15, 23, 42, 0.9); }
 
     .hub-footer { margin-top: 22px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
     .hub-footer a { color: var(--accent); text-decoration: none; }
@@ -164,7 +156,7 @@
       </header>
 
       <section class="hub-grid">
-        <!-- Project Charter -->
+        <!-- Section 01: Project Charter -->
         <a class="hub-tile" href="Project Charter Backup.html">
           <div class="hub-label">Section 01</div>
           <div class="hub-name"><span class="hub-icon">📘</span><span>Project Charter</span></div>
@@ -176,7 +168,7 @@
           </div>
         </a>
 
-        <!-- STAR Stories -->
+        <!-- Section 02: STAR Stories -->
         <a class="hub-tile" href="STAR Stories.html">
           <div class="hub-label">Section 02</div>
           <div class="hub-name"><span class="hub-icon">⭐</span><span>STAR Stories</span></div>
@@ -188,7 +180,7 @@
           </div>
         </a>
 
-        <!-- Status Updates -->
+        <!-- Section 03: Status Updates -->
         <a class="hub-tile" href="Status Updates.html">
           <div class="hub-label">Section 03</div>
           <div class="hub-name"><span class="hub-icon">📈</span><span>Status Updates</span></div>
@@ -200,7 +192,7 @@
           </div>
         </a>
 
-        <!-- NEW: Project Closure -->
+        <!-- Section 04: Project Closure -->
         <a class="hub-tile" href="Project Closure.html">
           <div class="hub-label">Section 04</div>
           <div class="hub-name"><span class="hub-icon">📕</span><span>Project Closure</span></div>
@@ -212,13 +204,20 @@
           </div>
         </a>
 
-      </section>
-
-      <footer class="hub-footer">
-        <span>Tip: Use this hub as your main navigation when presenting.</span>
-        <span><a href="Project Charter Backup.html">Jump to Project Charter →</a></span>
-      </footer>
-    </section>
-  </main>
-</body>
-</html>
+        <!-- Section 05: Stakeholder Interview -->
+        <a class="hub-tile" href="Stakeholder Interview.html">
+          <div class="hub-label">Section 05</div>
+          <div class="hub-name"><span class="hub-icon">🧑‍💼</span><span>Stakeholder Interview</span></div>
+          <p class="hub-desc">Interview summaries, insights, and reflections from project stakeholders.</p>
+          <div class="hub-meta">
+            <span class="meta-chip">Interviews</span>
+            <span class="meta-chip">Professional Insights</span>
+            <span class="meta-chip">Reflections</span>
+          </div>
+        </a>
+        <a class="hub-tile" href="Project Closure.html">
+          <div class="hub-label">Section 04</div>
+          <div class="hub-name"><span class="hub-icon">📕</span><span>Project Closure</span></div>
+          <p class="hub-desc">Final documentation of outcomes, performance analysis, lessons learned, and official closeout.</p>
+          <div class="hub-meta">
+            <span class
