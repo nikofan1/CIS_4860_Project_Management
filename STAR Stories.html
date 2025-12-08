@@ -34,6 +34,8 @@
       align-items: stretch;
       justify-content: center;
       padding: 32px 16px;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .page {
@@ -45,6 +47,8 @@
       box-shadow: var(--shadow-soft);
       padding: 28px 24px 32px;
       backdrop-filter: blur(16px);
+      position: relative;
+      z-index: 1;
     }
 
     @media (min-width: 768px) {
@@ -134,7 +138,7 @@
                   var(--card);
       border-radius: var(--radius-lg);
       border: 1px solid var(--card-border);
-      padding: 16px 16px 16px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -234,32 +238,76 @@
       color: rgba(148, 163, 184, 0.3);
     }
 
-    @media print {
-      body {
-        background: #ffffff;
-        padding: 0;
+    /* === Shooting Stars (IN FRONT of the page now!) === */
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999; /* <-- Stars now appear above everything */
+    }
+
+    .sky::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(248, 250, 252, 0.5), transparent),
+        radial-gradient(2px 2px at 80% 10%, rgba(248, 250, 252, 0.45), transparent),
+        radial-gradient(2px 2px at 30% 70%, rgba(248, 250, 252, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 60% 40%, rgba(248, 250, 252, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 90% 80%, rgba(248, 250, 252, 0.35), transparent);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        rgba(248, 250, 252, 0),
+        rgba(248, 250, 252, 0.9),
+        rgba(251, 191, 36, 0.9),
+        rgba(248, 250, 252, 0)
+      );
+      border-radius: 999px;
+      filter: drop-shadow(0 0 8px rgba(248, 250, 252, 0.9));
+      opacity: 0;
+      transform: rotate(-35deg);
+      animation: shooting linear forwards;
+    }
+
+    @keyframes shooting {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(-35deg);
+        opacity: 0;
       }
-      .page {
-        box-shadow: none;
-        border-radius: 0;
-        border: none;
-        background: #ffffff;
+      10% {
+        opacity: 1;
       }
-      .story-card {
-        background: #ffffff;
-        border-color: #e5e7eb;
-        break-inside: avoid;
+      100% {
+        transform: translate3d(420px, 220px, 0) rotate(-35deg);
+        opacity: 0;
       }
     }
+
   </style>
 </head>
+
 <body>
+
+  <!-- Shooting stars layer ABOVE the page -->
+  <div class="sky"></div>
+
   <main class="page">
     <header class="header">
       <div class="title-group">
         <div class="eyebrow">
           <span class="eyebrow-icon">⭐</span>
-          <span>Behavioral Interview – STAR Stories</span>
+          <span>My STAR Stories🌃</span>
         </div>
         <h1>Examples of My Experience Using the STAR Method</h1>
         <p class="subtitle">
@@ -267,16 +315,21 @@
           customer service, conflict resolution, teamwork, and fast-paced environments.
         </p>
       </div>
+      <div class="tag-pill">
+        <span>⭐⭐⭐⭐⭐</span>
+        <span>•</span>
+        <span>Customer-facing roles</span>
       </div>
     </header>
 
     <section class="stories">
-      <!-- STAR Story 1 -->
+
+      <!-- STAR STORY 1 -->
       <article class="story-card">
         <div class="story-header">
           <h2 class="story-title">
             <span class="story-star">⭐</span>
-            <span>STAR Story 1: Risk Mitigation</span>
+            STAR Story 1: Risk Mitigation
           </h2>
           <span class="story-tag">Hotel • Front Desk</span>
         </div>
@@ -284,33 +337,28 @@
           <div class="star-row">
             <span class="star-label">Situation</span>
             <p class="star-text">
-              A few years ago, while working as a front desk agent at a hotel, I noticed that
-              our property was completely sold out for the day. However, on Expedia, it still
-              showed that one room was available.
+              A few years ago, while working as a front desk agent at a hotel, I noticed Expedia showed
+              one room available even though we were fully sold out.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Task</span>
             <p class="star-text">
-              It was my responsibility to notify Expedia and ensure that the availability on
-              their website accurately reflected our sold-out status. This was important to
-              prevent overbookings, which could leave guests without a room, damage our
-              reputation, and cause frustration in the lobby.
+              I needed to notify Expedia immediately to prevent an overbooking that would lead to
+              unhappy guests and reputation damage.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Action</span>
             <p class="star-text">
-              I immediately contacted Expedia and informed them that we were fully booked. I
-              asked them to update their system to show no availability for that day.
+              I contacted Expedia support and requested they close the remaining room in their system.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Result</span>
             <p class="star-text">
-              By doing this, I prevented potential overbookings and avoided the scenario of
-              upset guests arriving with invalid reservations. This helped maintain guest
-              satisfaction and protected the hotel’s reputation.
+              I prevented an overbooking, avoided guest frustration, and helped maintain hotel
+              satisfaction scores.
             </p>
           </div>
         </div>
@@ -323,12 +371,12 @@
         </div>
       </article>
 
-      <!-- STAR Story 2 -->
+      <!-- STAR STORY 2 -->
       <article class="story-card">
         <div class="story-header">
           <h2 class="story-title">
             <span class="story-star">⭐</span>
-            <span>STAR Story 2: Resolving Conflict in a Group Project</span>
+            STAR Story 2: Resolving Conflict in a Group Project
           </h2>
           <span class="story-tag">School • Teamwork</span>
         </div>
@@ -336,32 +384,27 @@
           <div class="star-row">
             <span class="star-label">Situation</span>
             <p class="star-text">
-              During a semester-long group project, three teammates strongly disagreed on the
-              direction of the presentation, which caused delays and tension in the team.
+              During a semester-long project, teammates disagreed strongly on presentation direction,
+              causing delays.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Task</span>
             <p class="star-text">
-              As a group member, I needed to help bring the team back on track and reduce
-              conflict so we could complete the project by the deadline.
+              I needed to help resolve conflict and get the team focused again.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Action</span>
             <p class="star-text">
-              One day when class was over, I brought everyone together and allowed each person
-              to share their viewpoints respectfully. Then I proposed combining their
-              approaches, divided responsibilities fairly, and stayed organized so everyone
-              knew what to work on.
+              I gathered everyone, encouraged open discussion, and proposed combining ideas into a
+              unified approach.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Result</span>
             <p class="star-text">
-              The team agreed on the blended approach and began working better together. We
-              submitted the project on time and started to communicate more openly going
-              forward.
+              The team aligned, completed the project on time, and improved communication habits.
             </p>
           </div>
         </div>
@@ -374,12 +417,12 @@
         </div>
       </article>
 
-      <!-- STAR Story 3 -->
+      <!-- STAR STORY 3 -->
       <article class="story-card">
         <div class="story-header">
           <h2 class="story-title">
             <span class="story-star">⭐</span>
-            <span>STAR Story 3: Handling a Busy Rush Efficiently</span>
+            STAR Story 3: Handling a Busy Rush Efficiently
           </h2>
           <span class="story-tag">Restaurant • Operations</span>
         </div>
@@ -387,32 +430,28 @@
           <div class="star-row">
             <span class="star-label">Situation</span>
             <p class="star-text">
-              During a busy weekend working in a restaurant, we were short staffed and all the
-              tables were occupied. Customers were waiting longer than usual for their food
-              and the team was becoming overwhelmed.
+              On a busy weekend, the restaurant was short staffed, customers waited longer, and the
+              team felt overwhelmed.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Task</span>
             <p class="star-text">
-              I needed to step in and help our team take orders so service could run smoothly
-              and we could maintain a positive atmosphere despite the pressure.
+              I needed to help organize the team and speed up service.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Action</span>
             <p class="star-text">
-              I quickly adjusted everyone’s roles and stepped in to take all of the customer
-              orders. I asked the servers to focus on bringing the food out promptly and
-              taking care of their sections so we could stay organized and efficient.
+              I reassigned roles temporarily and took all customer orders while servers focused
+              strictly on food delivery.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Result</span>
             <p class="star-text">
-              The team got through the rush without any major issues. The manager later
-              thanked me for stepping in, staying calm, and helping the team stay coordinated
-              during a stressful shift.
+              We got through the rush smoothly, and the manager thanked me for keeping morale and
+              service quality high.
             </p>
           </div>
         </div>
@@ -425,12 +464,12 @@
         </div>
       </article>
 
-      <!-- STAR Story 4 -->
+      <!-- STAR STORY 4 -->
       <article class="story-card">
         <div class="story-header">
           <h2 class="story-title">
             <span class="story-star">⭐</span>
-            <span>STAR Story 4: Improving Customer Experience</span>
+            STAR Story 4: Improving Customer Experience
           </h2>
           <span class="story-tag">Restaurant • Customer Service</span>
         </div>
@@ -438,32 +477,26 @@
           <div class="star-row">
             <span class="star-label">Situation</span>
             <p class="star-text">
-              A customer came in who was visibly frustrated because they had a negative
-              experience during a previous visit. They were hesitant to order and seemed ready
-              to complain again.
+              A customer returned after a bad previous experience and was hesitant to order again.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Task</span>
             <p class="star-text">
-              My task was to rebuild trust and ensure this customer left satisfied.
+              I needed to rebuild trust and turn their visit into a positive one.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Action</span>
             <p class="star-text">
-              I approached them with empathy and apologized for their past experience. I
-              offered recommendations tailored to their preferences, checked on their meal
-              frequently without being intrusive, and made sure the kitchen prioritized their
-              order.
+              I apologized, gave personalized recommendations, checked in without being intrusive,
+              and ensured the kitchen prioritized their meal.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Result</span>
             <p class="star-text">
-              The customer’s mood improved, and they told the manager they appreciated how
-              well they were treated this time. They became a regular customer, and that extra
-              effort made a real difference.
+              The customer left satisfied, thanked us, and eventually became a regular.
             </p>
           </div>
         </div>
@@ -476,12 +509,12 @@
         </div>
       </article>
 
-      <!-- STAR Story 5 -->
+      <!-- STAR STORY 5 -->
       <article class="story-card">
         <div class="story-header">
           <h2 class="story-title">
             <span class="story-star">⭐</span>
-            <span>STAR Story 5: Turning Around a Guest’s Negative Experience</span>
+            STAR Story 5: Turning Around a Guest’s Negative Experience
           </h2>
           <span class="story-tag">Hotel • Service Recovery</span>
         </div>
@@ -489,31 +522,27 @@
           <div class="star-row">
             <span class="star-label">Situation</span>
             <p class="star-text">
-              While working at the hotel front desk, a guest arrived upset because their room
-              wasn’t ready at the expected check-in time. They were tired from traveling and
-              complained about the inconvenience.
+              A hotel guest arrived upset because their room wasn’t ready at check-in time.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Task</span>
             <p class="star-text">
-              I needed to calm the guest and resolve the issue quickly.
+              My task was to calm the guest and fix their situation quickly.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Action</span>
             <p class="star-text">
-              I apologized sincerely for the delay and checked the system to find the next
-              available clean room. I upgraded them at no extra cost and offered complimentary
-              drink vouchers while arranging for their luggage to be brought up. I kept the
-              guest updated throughout the process and ensured everything was ready promptly.
+              I apologized sincerely, upgraded their room, offered free drinks, arranged for luggage
+              handling, and kept them updated.
             </p>
           </div>
           <div class="star-row">
             <span class="star-label">Result</span>
             <p class="star-text">
-              The guest’s frustration eased and, the next day when they checked out, they left
-              a positive review specifically mentioning how well the situation was handled.
+              The guest felt valued and left a positive review thanking the front desk for turning
+              their day around.
             </p>
           </div>
         </div>
@@ -525,8 +554,45 @@
           <span class="story-index">05</span>
         </div>
       </article>
+
     </section>
   </main>
+
+  <!-- Shooting star script -->
+  <script>
+    (function () {
+      const sky = document.querySelector('.sky');
+
+      function createShootingStar() {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+
+        const startTop = Math.random() * 60;
+        const startLeft = Math.random() * 120 - 20;
+
+        star.style.top = startTop + 'vh';
+        star.style.left = startLeft + 'vw';
+
+        const duration = 1.8 + Math.random() * 1.7;
+        star.style.animationDuration = duration + 's';
+
+        sky.appendChild(star);
+
+        star.addEventListener('animationend', () => star.remove());
+      }
+
+      for (let i = 0; i < 3; i++) {
+        setTimeout(createShootingStar, i * 700);
+      }
+
+      setInterval(() => {
+        const batch = 1 + Math.floor(Math.random() * 2);
+        for (let i = 0; i < batch; i++) {
+          setTimeout(createShootingStar, i * 350);
+        }
+      }, 2600);
+    })();
+  </script>
+
 </body>
 </html>
-
