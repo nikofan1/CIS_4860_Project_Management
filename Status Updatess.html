@@ -28,11 +28,15 @@
       padding: 1.5rem;
       display: flex;
       justify-content: center;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .wrapper {
       width: 100%;
       max-width: 900px;
+      position: relative;
+      z-index: 1; /* keep content above background but below snow container */
     }
 
     h1, h2, h3, h4 {
@@ -160,14 +164,47 @@
         padding: 1rem;
       }
     }
+
+    /* === Snow effect === */
+
+    .snow-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999; /* above content */
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10vh;
+      user-select: none;
+      will-change: transform, opacity;
+      animation-name: snow-fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes snow-fall {
+      0% {
+        transform: translate3d(var(--x-start, 0), -10vh, 0);
+        opacity: var(--opacity, 0.8);
+      }
+      100% {
+        transform: translate3d(var(--x-end, 20px), 110vh, 0);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="snow-container" aria-hidden="true"></div>
+
   <div class="wrapper">
     <header>
       <h1>Weekly Project Status Reports</h1>
       <p class="intro">
-        Project: <strong>Entry-level I.T Position/strong><br />
+        Project: <strong>Entry-level I.T Position</strong><br />
         Project Manager: <strong>Niko Fan</strong>
       </p>
     </header>
@@ -702,5 +739,38 @@
       End of status reports.
     </p>
   </div>
+
+  <script>
+    // Simple snow generator
+    (function () {
+      const container = document.querySelector('.snow-container');
+      if (!container) return;
+
+      const SNOWFLAKE_COUNT = 80;
+
+      for (let i = 0; i < SNOWFLAKE_COUNT; i++) {
+        const flake = document.createElement('span');
+        flake.className = 'snowflake';
+        flake.textContent = '❄';
+
+        const size = 8 + Math.random() * 16; // px
+        const left = Math.random() * 100;    // vw
+        const drift = (Math.random() * 40 - 20); // -20 to 20px horizontal drift
+        const duration = 10 + Math.random() * 12; // seconds
+        const delay = -Math.random() * duration;  // start at different points
+        const opacity = 0.3 + Math.random() * 0.7;
+
+        flake.style.fontSize = size + 'px';
+        flake.style.left = left + 'vw';
+        flake.style.animationDuration = duration + 's';
+        flake.style.animationDelay = delay + 's';
+        flake.style.setProperty('--x-start', '0px');
+        flake.style.setProperty('--x-end', drift + 'px');
+        flake.style.setProperty('--opacity', opacity.toString());
+
+        container.appendChild(flake);
+      }
+    })();
+  </script>
 </body>
 </html>
