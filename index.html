@@ -1,9 +1,9 @@
-<index.html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Career Project Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       --bg-primary: radial-gradient(1200px 800px at 50% 10%, #00131f 0%, #001a2b 30%, #001e33 55%, #021a2a 100%);
@@ -18,7 +18,9 @@
       --radius-lg: 16px;
       --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -29,7 +31,51 @@
       align-items: center;
       justify-content: center;
       padding: 32px 16px;
+      position: relative;
+      overflow-x: hidden;
     }
+
+    /* ============================================================
+       🎄 COLOR-CHANGING HOLIDAY SNOW (IN FRONT OF EVERYTHING)
+       ============================================================ */
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      font-size: 1rem;
+      opacity: 0.95;
+      pointer-events: none;
+      animation-name: snowfall, snowcolors;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes snowfall {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(110vh); }
+    }
+
+    /* Holiday Color Cycle */
+    @keyframes snowcolors {
+      0%   { color: #ffffff; } /* white */
+      25%  { color: #ff4d4d; } /* red */
+      50%  { color: #4dff4d; } /* green */
+      75%  { color: #67e8f9; } /* icy cyan */
+      100% { color: #ffffff; } /* white again */
+    }
+
+    /* ============================================================ */
+
     .glass-layer {
       position: fixed;
       inset: 0;
@@ -41,7 +87,9 @@
       -webkit-backdrop-filter: blur(12px) saturate(130%);
       z-index: 0;
     }
+
     .hub-shell { width: 100%; max-width: 1080px; position: relative; z-index: 1; }
+
     .hub-card {
       background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 55%), rgba(15, 23, 42, 0.96);
       border-radius: 24px;
@@ -49,7 +97,11 @@
       box-shadow: var(--shadow-soft);
       padding: 28px 22px 30px;
     }
-    @media (min-width: 768px) { .hub-card { padding: 32px 32px 36px; } }
+
+    @media (min-width: 768px) {
+      .hub-card { padding: 32px 32px 36px; }
+    }
+
     .hub-header {
       display: flex;
       flex-wrap: wrap;
@@ -60,7 +112,9 @@
       border-bottom: 1px solid rgba(148, 163, 184, 0.35);
       padding-bottom: 18px;
     }
+
     .hub-title-group { max-width: 640px; }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -74,8 +128,16 @@
       text-transform: uppercase;
       color: var(--text-muted);
     }
+
     h1 { margin-top: 8px; font-size: clamp(24px, 3vw, 30px); letter-spacing: -0.03em; }
-    .subtitle { margin-top: 6px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    .subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     .pill {
       padding: 6px 12px;
       border-radius: 999px;
@@ -95,7 +157,10 @@
       grid-template-columns: minmax(0, 1fr);
       gap: 18px;
     }
-    @media (min-width: 840px) { .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    @media (min-width: 840px) {
+      .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
 
     .hub-tile {
       position: relative;
@@ -111,14 +176,30 @@
       transition: 0.16s ease;
       overflow: hidden;
     }
+
     .hub-tile:hover {
       transform: translateY(-4px);
       border-color: rgba(56, 189, 248, 0.8);
       background: var(--card-hover);
       box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
     }
-    .hub-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.16em; }
-    .hub-name { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+
+    .hub-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hub-name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .hub-icon {
       width: 26px;
       height: 26px;
@@ -131,17 +212,47 @@
       font-size: 15px;
       flex-shrink: 0;
     }
-    .hub-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-    .hub-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; font-size: 11px; color: var(--text-muted); }
-    .meta-chip { padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(51, 65, 85, 0.85); background: rgba(15, 23, 42, 0.9); }
 
-    .hub-footer { margin-top: 22px; font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .hub-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+    .hub-meta {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .meta-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(51, 65, 85, 0.85);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hub-footer {
+      margin-top: 22px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .hub-footer a { color: var(--accent); text-decoration: none; }
     .hub-footer a:hover { text-decoration: underline; }
   </style>
 </head>
+
 <body>
+
+  <!-- 🎄 SNOW LAYER (FRONT) -->
+  <div id="snow-container"></div>
+
   <div class="glass-layer"></div>
+
   <main class="hub-shell">
     <section class="hub-card">
       <header class="hub-header">
@@ -156,7 +267,7 @@
       </header>
 
       <section class="hub-grid">
-        <!-- Section 01: Project Charter -->
+
         <a class="hub-tile" href="Project Charter Backup.html">
           <div class="hub-label">Section 01</div>
           <div class="hub-name"><span class="hub-icon">☃️</span><span>Project Charter</span></div>
@@ -168,7 +279,6 @@
           </div>
         </a>
 
-        <!-- Section 02: STAR Stories -->
         <a class="hub-tile" href="STAR Stories.html">
           <div class="hub-label">Section 02</div>
           <div class="hub-name"><span class="hub-icon">🌃</span><span>STAR Stories</span></div>
@@ -180,7 +290,6 @@
           </div>
         </a>
 
-        <!-- Section 03: Status Updates -->
         <a class="hub-tile" href="Status Updatess.html">
           <div class="hub-label">Section 03</div>
           <div class="hub-name"><span class="hub-icon">📜</span><span>Status Updates</span></div>
@@ -192,7 +301,6 @@
           </div>
         </a>
 
-        <!-- Section 04: Project Closure -->
         <a class="hub-tile" href="Project Closure.html">
           <div class="hub-label">Section 04</div>
           <div class="hub-name"><span class="hub-icon">🎅🏻</span><span>Project Closure</span></div>
@@ -204,7 +312,6 @@
           </div>
         </a>
 
-        <!-- Section 05: Stakeholder Interview -->
         <a class="hub-tile" href="Stakeholder Interview.html">
           <div class="hub-label">Section 05</div>
           <div class="hub-name"><span class="hub-icon">🧑‍💼</span><span>Stakeholder Interview</span></div>
@@ -215,3 +322,33 @@
             <span class="meta-chip">Reflections</span>
           </div>
         </a>
+
+      </section>
+    </section>
+  </main>
+
+  <!-- 🎄 HOLIDAY SNOW SCRIPT -->
+  <script>
+    const snowContainer = document.getElementById("snow-container");
+
+    for (let i = 0; i < 80; i++) {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+
+      const size = Math.random() * 1.4 + 0.6;
+      const duration = Math.random() * 5 + 5;
+      const delay = Math.random() * 5;
+      const left = Math.random() * 100;
+
+      snowflake.style.left = left + "vw";
+      snowflake.style.fontSize = size + "rem";
+      snowflake.style.animationDuration = duration + "s";
+      snowflake.style.animationDelay = delay + "s";
+
+      snowContainer.appendChild(snowflake);
+    }
+  </script>
+
+</body>
+</html>
